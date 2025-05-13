@@ -1,5 +1,6 @@
 package in.tech_camp.ajax_app_java.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,18 +16,15 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class PostController {
 
+  @Autowired
   private final PostRepository postRepository;
 
   @GetMapping("/")
   public String showList(Model model) {
     var postList = postRepository.findAll();
     model.addAttribute("postList", postList);
+    model.addAttribute("postForm", new PostForm());
     return "posts/index";
-  }
-
-  @GetMapping("/postForm")
-  public String showPostForm(@ModelAttribute("postForm") PostForm form){
-      return "posts/postForm";
   }
 
   @PostMapping("/posts")
