@@ -4,6 +4,6 @@ COPY . .
 RUN gradle clean build -x test
 
 FROM eclipse-temurin:21-alpine
-COPY --from=build /app/build/libs/ajax_app_java-0.0.1-SNAPSHOT.jar ajaxapp.jar
+COPY --from=build /app/build/libs/ajax_app_java-0.0.1-SNAPSHOT.jar ajax_app_java.jar
 EXPOSE 8080
-ENTRYPOINT ["java", "-jar", "ajaxapp.jar", "--spring.profiles.active=prod", "--debug"]
+ENTRYPOINT ["java", "-jar", "ajax_app_java.jar", "--spring.profiles.active=prod", "--debug"]
